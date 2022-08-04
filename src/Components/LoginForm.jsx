@@ -6,15 +6,6 @@ export default function LoginForm(props) {
 
   const [Data, Setdata] = useState({});
 
-  const asyfunc = async () => {
-    console.log("Sent!")
-    await axios.post("http://localhost:8000/user/async")
-      .then((res) => {
-        Setdata(res)
-        console.log(Data)
-      })
-  }
-
   return (
     <React.Fragment>
       <div className='container my-5'>
@@ -29,7 +20,6 @@ export default function LoginForm(props) {
               <TextField required={true} onChange={props.form.handleChange} type={"password"} name="pass" margin='dense' fullWidth id="password" label="Password" variant="outlined" />
               <div className='d-flex justify-content-center my-2'>
                 <Button disabled={props.stat} type='submit' variant="outlined">Login</Button>
-                <Button disabled={props.stat} onClick={asyfunc} variant="outlined">Register</Button>
               </div>
             </form>
           </div>

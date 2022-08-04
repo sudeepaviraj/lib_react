@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import {Routes,Route} from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import HomePage from "./Components/HomePage";
+import NewBook from "./Components/NewBook";
+import EditBook from "./Components/EditBook"
+
 
 function App() {
 
@@ -19,12 +22,11 @@ function App() {
   let nav = useNavigate()
 
   const [ButtonStat,SetButtonStat] = useState(false)
-  const [LogStat,SetLogStat] = useState()
 
   const LoginHandler = async (e) => {
     SetButtonStat(true)
     e.preventDefault();
-    await axios.post("http://localhost:8000/user/login",LoginData.values)
+    await axios.post("https://peaceful-woodland-66033.herokuapp.com/login",LoginData.values)
     .then( async (res)=>{
       Swal.fire({
         title:"Success !",
@@ -32,8 +34,7 @@ function App() {
         icon:"success"
       })
       SetButtonStat(false)
-      await SetLogStat(true)
-      nav('/home',{state:{login_stat:LogStat}})
+      nav('/home',{state:{login_stat:true}})
       sessionStorage.setItem('login_info',JSON.stringify(res.data.data[0]));
     })
     .catch((err)=>{
@@ -53,6 +54,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm form={LoginData} butt = {LoginHandler} stat = {ButtonStat}/>}/>
         <Route path="/home" element={<HomePage/>}/>
+        <Route path="new" element={<NewBook/>}/>
+        <Route path="edit/:id" element={<EditBook/>}/>
       </Routes>
     </React.Fragment>
   );
