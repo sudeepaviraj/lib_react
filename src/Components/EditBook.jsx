@@ -4,9 +4,11 @@ import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export default function EditBook() {
+
+  const nav = useNavigate()
 
   var book_id = useParams();
 
@@ -15,39 +17,56 @@ export default function EditBook() {
   const [SingleBookData,SetSingleBookData] = useState()
 
   const SingleBook =  async() =>{
-   await axios.get(`https://peaceful-woodland-66033.herokuapp.com/book/${book_id["id"]}`)
+   await axios.get(`http://127.0.0.1:8000/book/${book_id["id"]}`)
    .then(async (res)=>{
     SetSingleBookData(res.data)
+    console.log("Req Sent")
    })
   }
-  
+ 
   const EditBookData = useFormik({
     initialValues:{
-      title:null,
-      author:null,
-      isbn:null,
-      publisher:null
+
     }
   })
 
-  const UpdateBook = () =>{
+  const UpdateBook = async () =>{
+    if(EditBookData.values.title || EditBookData.values.isbn || EditBookData.values.author  ||EditBookData.values.publisher )
+    {
+      await axios.put(`http://127.0.0.1:8000/book/update/${SingleBookData._id}`,EditBookData.values)
+      .then((res)=>{
+        Swal.fire({
+          title:"Update Success",
+          text:"Book Data Updated Successfully!",
+          icon:"success"
+        })
+      })
     SetButtonStat(true)
+    nav("/home")
+    }
+    else{
+      Swal.fire({
+        title:"Data Not Updated !",
+        text:"Nothing Changed !",
+        icon:"warning"
+      })
+    SetButtonStat(true)
+    nav("/home")
+    }
+    
   }
 
   useEffect(()=>{
     SingleBook()
-
-  },[SingleBookData])
+  },[])
 
   const SubmitHandler = (e) =>{
     e.preventDefault()
     UpdateBook()
-    SetSingleBookData()
   }
 
   return (
     <React.Fragment>
-
         <div className="container mt-5">
           { SingleBookData &&
             <div className="form-group d-flex justify-content-center">
@@ -70,7 +89,6 @@ export default function EditBook() {
             </div>
           } 
         </div>
-
     </React.Fragment>
   )
 }

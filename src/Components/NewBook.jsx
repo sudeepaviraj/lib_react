@@ -4,9 +4,11 @@ import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 export default function NewBook() {
 
+  let nav = useNavigate()
   const NewBookData = useFormik({
     initialValues:{
       title:null,
@@ -17,7 +19,9 @@ export default function NewBook() {
   })
 
   const SaveBook = async() =>{
-    axios.post("https://peaceful-woodland-66033.herokuapp.com/book/save",NewBookData.values)
+    const auth = JSON.parse(sessionStorage.getItem("auth"))
+    const token ={...NewBookData.values,auth} 
+    axios.post("http://127.0.0.1:8000/book/save",token)
     .then((res)=>{
       if(res.data.status){
         Swal.fire({
@@ -26,6 +30,7 @@ export default function NewBook() {
           icon:"success"
         })
         NewBookData.values=null;
+        nav("/home")
       }
     })
     .catch((err)=>{
@@ -48,7 +53,6 @@ export default function NewBook() {
 
   return (
     <React.Fragment>
-
         <div className="container mt-5">
             <div className="form-group d-flex justify-content-center">
                 <div className="col-4">
