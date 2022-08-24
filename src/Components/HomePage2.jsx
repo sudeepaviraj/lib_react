@@ -37,10 +37,6 @@ export default function HomePage2() {
         selector: row => row.isbn
     },
     {
-        name: "Actions",
-        selector: row => row.isbn
-    },
-    {
         name: 'Actions',
         button: true,
         cell: row => (
