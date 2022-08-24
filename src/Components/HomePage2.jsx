@@ -37,6 +37,10 @@ export default function HomePage2() {
         selector: row => row.isbn
     },
     {
+        name: "Book Publisher",
+        selector: row => row.publisher
+    },
+    {
         name: 'Actions',
         button: true,
         cell: row => (
@@ -52,6 +56,17 @@ export default function HomePage2() {
     }
     ]
 
+    const CreateBookFunc = (data) =>{
+      axios.post('http://127.0.0.1:8000/book/save',data)
+      .then(res=>{
+        console.log(res);
+        BookDataReq()
+      })
+      .catch(err=>{
+        console.log(err);
+      })  
+    }
+
     const DeleteAction = (row) => {
         Swal.fire({
             title: `Are You Sure Wanna Delete ${row.title}?`,
@@ -63,13 +78,27 @@ export default function HomePage2() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log("Deleted");
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                axios.delete(`http://127.0.0.1:8000/book/delete/${row._id}`)
+                .then(res=>{
+                    console.log(res)
+                    BookDataReq()
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                })
+                .catch(err=>{
+                    console.log(err);
+                    Swal.fire(
+                        'Failed !',
+                        'Your file has not been deleted.',
+                        'error'
+                    )
+                })
+
             }
+
         })
     }
 
@@ -79,24 +108,34 @@ export default function HomePage2() {
             html:
                 `<input id="swal-input1" class=" my-2 form-control" value="${row.title}">` +
                 `<input id="swal-input2" class=" my-2 form-control" value="${row.author}">` +
-                `<input id="swal-input3" class=" my-2 form-control" value="${row.isbn}">`,
+                `<input id="swal-input3" class=" my-2 form-control" value="${row.isbn}">`+
+                `<input id="swal-input4" class=" my-2 form-control" value="${row.publisher}">`,
             focusConfirm: false,
             preConfirm: () => {
                 const dataSet = {
                     title: document.getElementById('swal-input1').value,
                     author: document.getElementById('swal-input2').value,
-                    isbn: document.getElementById('swal-input3').value
+                    isbn: document.getElementById('swal-input3').value,
+                    publisher: document.getElementById('swal-input4').value
                 }
                 return dataSet
             }
         })
-
-        if (formValues.title !== row.title || formValues.author !== row.author || formValues.isbn != row.isbn) {
+        const UpdateRequest = async (dataSet) =>{
+            await axios.put(`http://127.0.0.1:8000/book/update/${row._id}`,dataSet)
+            .then(res=>{
+                console.log(res);
+            })
+            await BookDataReq()
+        }
+        if (formValues.title !== row.title || formValues.author !== row.author || formValues.isbn != row.isbn || formValues.publisher != row.publisher) {
+            
             Swal.fire({
                 title:"Updated !",
                 text:"Data Updated Successfully !",
                 icon:'success'
             })
+            UpdateRequest(formValues)
             console.log(formValues,row);
         }
     }
@@ -107,14 +146,18 @@ export default function HomePage2() {
             html:
                 `<input id="swal-input1" class=" my-2 form-control" placeholder="Book Name" >` +
                 `<input id="swal-input2" class=" my-2 form-control" placeholder="Book Author" >` +
-                `<input id="swal-input3" class=" my-2 form-control" placeholder="Book ISBN" >`,
+                `<input id="swal-input3" class=" my-2 form-control" placeholder="Book ISBN" >`+
+                `<input id="swal-input4" class=" my-2 form-control" placeholder="Book Publisher" >`,
             focusConfirm: false,
             preConfirm: () => {
                 const dataSet = {
                     title: document.getElementById('swal-input1').value,
                     author: document.getElementById('swal-input2').value,
-                    isbn: document.getElementById('swal-input3').value
+                    isbn: document.getElementById('swal-input3').value,
+                    publisher: document.getElementById('swal-input4').value,
+                    auth:JSON.parse(sessionStorage.getItem('auth'))
                 }
+                CreateBookFunc(dataSet)
                 return dataSet
             }
         })
@@ -170,7 +213,7 @@ export default function HomePage2() {
                         </span>
                     </div>
                 </div>
-                <DataTable columns={cols} data={BookData} />
+                <DataTable columns={cols} data={BookData} pagination/>
             </div>
         </React.Fragment>
     )
