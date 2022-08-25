@@ -12,7 +12,7 @@ export default function LoginForm(props) {
 
   const handleLogin = (data) => {
     console.log(data);
-    let user = jwt_decode(data)
+    let user = jwt_decode(data.credential)
     console.log(user)
   }
 
