@@ -42,7 +42,7 @@ export default function LoginForm(props) {
               <TextField required={true} onChange={props.form.handleChange} name='username' margin='dense' fullWidth id="username" label="Username" variant="outlined" />
               <TextField required={true} onChange={props.form.handleChange} type={"password"} name="pass" margin='dense' fullWidth id="password" label="Password" variant="outlined" />
               <div className='d-flex justify-content-center my-2'>
-                <Button disabled={props.stat} type='submit' variant="outlined">Login</Button>
+                <Button disabled={props.stat} type='submit' variant="outlined">Sign In</Button>
               </div>
               <div id='butt' className='d-flex justify-content-center my-2'>
 
