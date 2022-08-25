@@ -1,6 +1,9 @@
 import React from 'react'
 import { TextField, Button } from '@mui/material'
 import { useEffect } from 'react'
+import jwt_decode from 'jwt-decode'
+
+
 export default function LoginForm(props) {
 
   const handleFalure = (res) =>{
@@ -9,6 +12,8 @@ export default function LoginForm(props) {
 
   const handleLogin = (data) => {
     console.log(data);
+    let user = jwt_decode(data)
+    console.log(user)
   }
 
   useEffect(()=>{
