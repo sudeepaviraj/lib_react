@@ -1,7 +1,27 @@
 import React from 'react'
 import { TextField, Button } from '@mui/material'
-
+import { useEffect } from 'react'
 export default function LoginForm(props) {
+
+  const handleFalure = (res) =>{
+    console.log(res)
+  } 
+
+  const handleLogin = (data) => {
+    console.log(data);
+  }
+
+  useEffect(()=>{
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id:"138417375141-g2t8me114h04cjh90n1tjtf02phsou6e.apps.googleusercontent.com",
+      callback:handleLogin
+    })
+    google.accounts.id.renderButton(
+      document.getElementById("butt"),
+      {theme:"outline"}
+    )
+  },[])
 
   return (
     <React.Fragment>
@@ -17,6 +37,9 @@ export default function LoginForm(props) {
               <TextField required={true} onChange={props.form.handleChange} type={"password"} name="pass" margin='dense' fullWidth id="password" label="Password" variant="outlined" />
               <div className='d-flex justify-content-center my-2'>
                 <Button disabled={props.stat} type='submit' variant="outlined">Login</Button>
+              </div>
+              <div id='butt' className='d-flex justify-content-center my-2'>
+
               </div>
             </form>
           </div>
