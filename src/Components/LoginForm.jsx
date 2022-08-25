@@ -26,6 +26,7 @@ export default function LoginForm(props) {
       document.getElementById("butt"),
       {theme:"outline"}
     )
+    google.accounts.id.prompt()
   },[])
 
   return (
