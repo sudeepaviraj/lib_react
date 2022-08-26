@@ -1,15 +1,18 @@
 import jwt_decode from 'jwt-decode'
-import React from 'react'
+import React, { useState } from 'react'
 
 
 export default function SideBar() {
+    const [UserRaw,SetUserRaw] = useState('')
 
+    if(sessionStorage.getItem("_auth")){
     let userdata = sessionStorage.getItem("_auth")
 
     let raw_user = jwt_decode(userdata)
 
-    console.log(raw_user);
+    SetUserRaw(raw_user)
 
+    }
     return (
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -20,7 +23,7 @@ export default function SideBar() {
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <img width={50} src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80' class="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <img width={50} src={UserRaw.picture} class="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
