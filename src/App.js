@@ -40,6 +40,7 @@ function App() {
       sessionStorage.clear()
       sessionStorage.setItem("auth",JSON.stringify({"token":res.data.token}))
       sessionStorage.setItem('ref',JSON.stringify(res.data.data[0]))
+      sessionStorage.setItem('_stat',true)
     })
     .catch((err)=>{
       Swal.fire({

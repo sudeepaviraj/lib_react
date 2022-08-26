@@ -19,6 +19,7 @@ export default function LoginForm(props) {
     console.log(user)
     nav('/home')
     sessionStorage.setItem('_auth',data.credential)
+    sessionStorage.setItem('_stat',true)
   }
 
   useEffect(()=>{
