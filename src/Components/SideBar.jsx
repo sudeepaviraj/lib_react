@@ -1,13 +1,17 @@
 import jwt_decode from 'jwt-decode'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 export default function SideBar() {
-    const [UserRaw,SetUserRaw] = useState('')
+    const [UserRaw,SetUserRaw] = useState({})
 
-    if("_auth" in sessionStorage){
-        console.log("Auth");
-    }
+    useEffect(()=>{
+        if("_auth" in sessionStorage){
+            let raw_data = jwt_decode(sessionStorage.getItem('_auth'))
+            SetUserRaw(raw_data)
+        }
+    })
+    
 
     return (
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
@@ -20,7 +24,7 @@ export default function SideBar() {
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <img width={50} class="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="dropdown-menu" src={UserRaw?.picture} aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
                         </li>
