@@ -18,6 +18,7 @@ export default function LoginForm(props) {
     let user = jwt_decode(data.credential)
     console.log(user)
     nav('/home')
+    sessionStorage.setItem('_auth',data.credential)
   }
 
   useEffect(()=>{

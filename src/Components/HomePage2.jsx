@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import DataTable from 'react-data-table-component'
 import Swal from 'sweetalert2'
+import SideBar from './SideBar'
 
 export default function HomePage2() {
 
@@ -199,6 +200,7 @@ export default function HomePage2() {
     }
     return (
         <React.Fragment>
+            <SideBar/>
             <div className='container my-2'>
                 <div className='d-flex justify-content-between'>
                     <div>
