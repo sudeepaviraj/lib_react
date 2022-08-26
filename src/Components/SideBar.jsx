@@ -4,6 +4,11 @@ import React, { useState } from 'react'
 
 export default function SideBar() {
     const [UserRaw,SetUserRaw] = useState('')
+
+    if("_auth" in sessionStorage){
+        console.log("Auth");
+    }
+
     return (
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
