@@ -32,11 +32,12 @@ export default function LoginForm(props) {
       {theme:"outline"}
     )
     google.accounts.id.prompt()
+    if(sessionStorage.getItem('_auth')){
+      nav('/home')
+    }
   },[])
 
-  if(sessionStorage.getItem('_auth')){
-    return (nav('home'))
-  }
+  
   return (
     <React.Fragment>
       <div className='container my-5'>
