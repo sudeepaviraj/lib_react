@@ -34,6 +34,10 @@ export default function LoginForm(props) {
     google.accounts.id.prompt()
   },[])
 
+  if(sessionStorage.getItem('_auth')){
+  const user = jwt_decode(sessionStorage.getItem('_auth'))
+  console.log(user);
+  }
   return (
     <React.Fragment>
       <div className='container my-5'>
