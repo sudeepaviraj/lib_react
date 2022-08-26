@@ -2,9 +2,12 @@ import React from 'react'
 import { TextField, Button } from '@mui/material'
 import { useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function LoginForm(props) {
+
+  const nav = useNavigate()
 
   const handleFalure = (res) =>{
     console.log(res)
@@ -14,6 +17,7 @@ export default function LoginForm(props) {
     console.log(data);
     let user = jwt_decode(data.credential)
     console.log(user)
+    nav('/home')
   }
 
   useEffect(()=>{
