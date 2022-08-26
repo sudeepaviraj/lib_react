@@ -11,7 +11,7 @@ export default function SideBar() {
             SetUserRaw(raw_data)
             console.log(UserRaw?.picture);
         }
-    })
+    },[])
     
 
     return (
