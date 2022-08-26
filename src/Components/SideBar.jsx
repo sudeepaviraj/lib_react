@@ -3,30 +3,28 @@ import React, { useEffect, useState } from 'react'
 
 
 export default function SideBar() {
-    const [UserRaw,SetUserRaw] = useState({})
-
+    
     useEffect(()=>{
         if("_auth" in sessionStorage){
             let raw_data = jwt_decode(sessionStorage.getItem('_auth'))
-            SetUserRaw(raw_data)
-            console.log(UserRaw?.picture);
+            console.log(raw_data);
         }
     },[])
     
 
     return (
-        <nav class="container navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">SJC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav className="container navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="#">SJC</a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <img width={50} class="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
-                            <ul class="dropdown-menu" src={UserRaw?.picture} aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item dropdown">
+                            <img width={50} className="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a className="dropdown-item" href="#">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
