@@ -5,8 +5,12 @@ import { useState } from 'react'
 import DataTable from 'react-data-table-component'
 import Swal from 'sweetalert2'
 import SideBar from './SideBar'
+import {useNavigate} from 'react-router-dom'
+
 
 export default function HomePage2() {
+
+    const nav = useNavigate()
 
     const [BookData, SetBookData] = useState([])
 
@@ -22,6 +26,11 @@ export default function HomePage2() {
     }
 
     useEffect(() => {
+        if (!('_stat' in sessionStorage)){
+            if(!(sessionStorage.getItem("_stat"))){
+             return nav('/')
+            }
+        }
         BookDataReq()
     }, [])
 
@@ -219,5 +228,5 @@ export default function HomePage2() {
             </div>
         </React.Fragment>
     )
-}
+    }
 
