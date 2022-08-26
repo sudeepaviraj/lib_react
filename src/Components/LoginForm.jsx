@@ -35,8 +35,7 @@ export default function LoginForm(props) {
   },[])
 
   if(sessionStorage.getItem('_auth')){
-  const user = jwt_decode(sessionStorage.getItem('_auth'))
-  console.log(user);
+    nav('home')
   }
   return (
     <React.Fragment>
