@@ -9,6 +9,7 @@ export default function SideBar() {
         if("_auth" in sessionStorage){
             let raw_data = jwt_decode(sessionStorage.getItem('_auth'))
             SetUserRaw(raw_data)
+            console.log(UserRaw?.picture);
         }
     })
     
