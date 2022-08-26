@@ -15,7 +15,7 @@ export default function HomePage2() {
     const [BookData, SetBookData] = useState([])
 
     const BookDataReq = async () => {
-        await axios.get("http://127.0.0.1:8000/books", {
+        await axios.get("https://peaceful-woodland-66033.herokuapp.com/books", {
             headers: {
                 'x-auth_token': "Sudeepa"
             }
@@ -67,7 +67,7 @@ export default function HomePage2() {
     ]
 
     const CreateBookFunc = (data) =>{
-      axios.post('http://127.0.0.1:8000/book/save',data)
+      axios.post('https://peaceful-woodland-66033.herokuapp.com/book/save',data)
       .then(res=>{
         console.log(res);
         BookDataReq()
@@ -88,7 +88,7 @@ export default function HomePage2() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://127.0.0.1:8000/book/delete/${row._id}`)
+                axios.delete(`https://peaceful-woodland-66033.herokuapp.com/delete/${row._id}`)
                 .then(res=>{
                     console.log(res)
                     BookDataReq()
@@ -132,7 +132,7 @@ export default function HomePage2() {
             }
         })
         const UpdateRequest = async (dataSet) =>{
-            await axios.put(`http://127.0.0.1:8000/book/update/${row._id}`,dataSet)
+            await axios.put(`https://peaceful-woodland-66033.herokuapp.com/book/update/${row._id}`,dataSet)
             .then(res=>{
                 console.log(res);
             })

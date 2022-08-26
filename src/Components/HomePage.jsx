@@ -11,7 +11,7 @@ export default function HomePage(props) {
     let nav = useNavigate();
     const [Load,IsLoaded] = useState(true);
     const GetBooks = async () => {
-        await axios.get("http://127.0.0.1:8000/books",{headers:{
+        await axios.get("https://peaceful-woodland-66033.herokuapp.com/books",{headers:{
             'x-auth_token':"Sudeepa"
         }})
         .then(async(res)=>{
@@ -37,7 +37,7 @@ export default function HomePage(props) {
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://127.0.0.1:8000/book/delete/${id}`)
+                axios.delete(`https://peaceful-woodland-66033.herokuapp.com/book/delete/${id}`)
               Swal.fire(
                 'Deleted!',
                 'Your record has been deleted.',

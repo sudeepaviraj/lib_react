@@ -20,7 +20,6 @@ export default function LoginForm(props) {
     nav('/home')
     sessionStorage.setItem('_auth',data.credential)
     sessionStorage.setItem('_stat',true)
-    sessionStorage.setItem('type',"social")
   }
 
   useEffect(()=>{
