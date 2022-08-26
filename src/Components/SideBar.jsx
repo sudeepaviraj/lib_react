@@ -4,15 +4,6 @@ import React, { useState } from 'react'
 
 export default function SideBar() {
     const [UserRaw,SetUserRaw] = useState('')
-
-    if(sessionStorage.getItem("_auth")){
-    let userdata = sessionStorage.getItem("_auth")
-
-    let raw_user = jwt_decode(userdata)
-
-    SetUserRaw(raw_user)
-
-    }
     return (
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
