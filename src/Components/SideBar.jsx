@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 
 export default function SideBar() {
 
-    nav  = useNavigate()
+    const nav  = useNavigate()
 
     const LogoutFunc = () =>{
         sessionStorage.clear()
