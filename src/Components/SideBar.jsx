@@ -10,7 +10,6 @@ export default function SideBar() {
         if("_auth" in sessionStorage){
             let raw_data = jwt_decode(sessionStorage.getItem('_auth'))
             SetRawData(raw_data)
-            console.log(RawData);
         }
     },[])
     
@@ -25,7 +24,7 @@ export default function SideBar() {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item dropdown">
-                            <img width={50} className="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <img width={50} src={RawData?.picture} className="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a className="dropdown-item" href="#">Log Out</a></li>
                             </ul>
