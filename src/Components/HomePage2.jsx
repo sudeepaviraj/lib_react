@@ -88,7 +88,7 @@ export default function HomePage2() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://peaceful-woodland-66033.herokuapp.com/delete/${row._id}`)
+                axios.delete(`https://peaceful-woodland-66033.herokuapp.com/book/delete/${row._id}`)
                 .then(res=>{
                     console.log(res)
                     BookDataReq()
