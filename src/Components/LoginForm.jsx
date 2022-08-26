@@ -31,7 +31,6 @@ export default function LoginForm(props) {
       document.getElementById("butt"),
       {theme:"outline"}
     )
-    google.accounts.id.prompt()
     if(sessionStorage.getItem('_auth')){
       nav('/home')
     }

@@ -23,10 +23,10 @@ export default function SideBar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item dropdown">
+                        <li className="nav-item dropdown dropdown-sm">
                             <img width={50} src={RawData?.picture} className="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a className="dropdown-item" href="#">Log Out</a></li>
+                                <li><a className="dropdown-item" href="#">Log Out<i class="fa-solid fa-power-off mx-3"></i></a></li>
                             </ul>
                         </li>
                     </ul>
