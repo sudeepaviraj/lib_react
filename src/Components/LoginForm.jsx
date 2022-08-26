@@ -35,7 +35,7 @@ export default function LoginForm(props) {
   },[])
 
   if(sessionStorage.getItem('_auth')){
-    nav('home')
+    return (nav('home'))
   }
   return (
     <React.Fragment>
