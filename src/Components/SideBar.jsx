@@ -4,10 +4,13 @@ import React, { useEffect, useState } from 'react'
 
 export default function SideBar() {
     
+    const [RawData,SetRawData] = useState({})
+
     useEffect(()=>{
         if("_auth" in sessionStorage){
             let raw_data = jwt_decode(sessionStorage.getItem('_auth'))
-            console.log(raw_data);
+            SetRawData(raw_data)
+            console.log(RawData);
         }
     },[])
     
