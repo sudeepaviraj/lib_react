@@ -1,6 +1,15 @@
+import jwt_decode from 'jwt-decode'
 import React from 'react'
 
+
 export default function SideBar() {
+
+    let userdata = sessionStorage.getItem("_auth")
+
+    let raw_user = jwt_decode(userdata)
+
+    console.log(raw_user);
+
     return (
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
