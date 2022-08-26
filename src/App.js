@@ -41,6 +41,7 @@ function App() {
       sessionStorage.setItem("auth",JSON.stringify({"token":res.data.token}))
       sessionStorage.setItem('ref',JSON.stringify(res.data.data[0]))
       sessionStorage.setItem('_stat',true)
+      sessionStorage.setItem('type','manual')
     })
     .catch((err)=>{
       Swal.fire({

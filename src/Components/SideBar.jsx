@@ -10,7 +10,8 @@ export default function SideBar() {
         sessionStorage.clear()
         nav('/')
     }
-    
+    const img = 'https://api.multiavatar.com/wiliwonka.jpg'
+
     const [RawData,SetRawData] = useState({})
 
     useEffect(()=>{
@@ -31,9 +32,9 @@ export default function SideBar() {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item dropdown dropdown-sm">
-                            <img width={50} src={RawData?.picture} className="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <img width={50} src={RawData?.picture ? RawData.picture : "https://api.multiavatar.com/wiliwonka.png"} className="nav-link dropdown-toggle rounded-circle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"/>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a onClick={LogoutFunc} className="dropdown-item" href="#">Log Out<i class="fa-solid fa-power-off mx-3"></i></a></li>
+                                <li><a onClick={LogoutFunc} className="dropdown-item">Log Out<i className="fa-solid fa-power-off mx-3"></i></a></li>
                             </ul>
                         </li>
                     </ul>
